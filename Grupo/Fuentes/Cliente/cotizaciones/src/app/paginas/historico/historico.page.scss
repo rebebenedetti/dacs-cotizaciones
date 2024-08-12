@@ -1,0 +1,25 @@
+ion-spinner {
+    width: 100px;
+    height: 100px;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.grid-resultados{
+    max-width: 90vw;
+}
+.cabecera{
+    background-color: rgba(var(--ion-color-medium-rgb),0.3);
+    font-weight: bold;
+}
+
+.columnas-resultados{
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(var(--ion-color-medium-rgb),0.4);
+}

@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Consultar histórico de una divisa</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <h4>
+    Seleccione la divisa sobre la cual desea conocer el histórico de su
+    cotización
+  </h4>
+  <app-buscar-monedas (cambioOpcionSeleccionada)="opcionSeleccionada=$event"></app-buscar-monedas>
+  <h4>Seleccioná las fechas:</h4>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+            <ion-label>Desde:</ion-label>
+            <ion-datetime-button slot="end" datetime="desde"></ion-datetime-button>
+            <ion-icon name="calendar" slot="end"></ion-icon>
+          </ion-item>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <!-- El min va a depender de la base de datos -->
+              <ion-datetime  id="desde" min="2022-08-01" max="{{ fechaActual | date: 'yyyy-MM-dd'}}" presentation="date"
+                [showDefaultButtons]="true" doneText="Aceptar" cancelText="Cancelar" (ionChange)="determinarFechaDesde($event)">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+      </ion-col>
+      <ion-col>
+          <ion-item>
+            <ion-label>Hasta:</ion-label>
+            <ion-datetime-button slot="end" datetime="hasta"></ion-datetime-button>
+            <ion-icon name="calendar" slot="end"></ion-icon>
+          </ion-item>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="hasta" min="{{fechaMinima}}" max="{{ fechaActual | date: 'yyyy-MM-dd' }}" presentation="date"
+                [showDefaultButtons]="true" doneText="Aceptar" cancelText="Cancelar"
+                (ionChange)="determinarFechaHasta($event)">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-button (click)="enviarSeleccion()">Mostrar cotizaciones</ion-button>
+
+  <div *ngIf="cargando" class="spinner-container">
+    <ion-spinner name="lines-sharp" color="primary" ></ion-spinner>
+  </div>
+
+  <ion-grid class="grid-resultados" *ngIf="mostrar">
+    <ion-row  class="cabecera">
+      <ion-col class="columnas-resultados"> 
+        <ion-text>MERCADO DE CAMBIOS - COTIZACIONES CIERRE VENDEDOR</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="cabecera">
+      <ion-col class="columnas-resultados">
+        <ion-text>{{monedaSeleccionada}} / {{monedaUsuario}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="cabecera">
+      <ion-col class="columnas-resultados">Fecha</ion-col>
+      <ion-col class="columnas-resultados">Tipo de cambio - (por unidad)</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let cotizacion of cotizaciones">
+      <ion-col class="columnas-resultados">{{ cotizacion.fecha | date:'dd/MM/yyyy, HH:mm'}}</ion-col>
+      <ion-col class="columnas-resultados">{{ cotizacion.cotizacion }}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

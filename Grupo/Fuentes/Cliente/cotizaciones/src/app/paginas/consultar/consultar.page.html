@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Consultar divisa</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h4>Seleccione la divisa sobre la cual desea conocer su cotización:</h4>
+  <app-buscar-monedas (cambioOpcionSeleccionada)="opcionSeleccionada=$event"></app-buscar-monedas>
+  <ion-button (click)="enviarSeleccion()">Mostrar cotizacion</ion-button>
+  
+  <div *ngIf="cargando" class="spinner-container">
+    <ion-spinner name="lines-sharp" color="primary" ></ion-spinner>
+  </div>
+
+  <ion-grid *ngIf="mostrar && !cargando">
+    <ion-row class="cabecera">
+      <ion-col class="columna">Moneda</ion-col>
+      <ion-col class="columna">Venta</ion-col>
+      <ion-col class="columna">Fecha</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="columna">{{cotizacionActual.nombreMonedaSeleccionada}} / {{cotizacionActual.nombreMonedaUsuario}}</ion-col>
+      <ion-col class="columna">{{cotizacionActual.cotizacion}}</ion-col>
+      <ion-col class="columna">{{cotizacionActual.fecha | date:'dd/MM/yyyy, HH:mm'}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

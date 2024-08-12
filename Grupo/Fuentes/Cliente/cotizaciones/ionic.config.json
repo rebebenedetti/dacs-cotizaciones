@@ -1,0 +1,7 @@
+{
+  "name": "cotizaciones",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

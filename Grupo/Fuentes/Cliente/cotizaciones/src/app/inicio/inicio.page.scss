@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'Gothic 725 Black BT';
+    src: url('../../assets/fuentes/Gothic 725 Black BT.ttf');
+}
+
+ion-content{
+    text-align: center;
+}
+
+img{
+    margin-top: 40px;
+    width: 8vw;
+}
+
+.icono p{
+    font-family: 'Gothic 725 Black BT';
+    font-size: 5vw;
+    margin-top: 0px;
+    margin-bottom: 25px;
+    padding: 0;
+    letter-spacing: 2.5px;
+}
+
+@media (width < 1000px) and (width > 800px) {
+    img{ width: 10vw;}
+    .icono p{ font-size: 6.3vw;}
+}
+
+@media (width < 800px) and (width > 550px) {
+    img{ width: 18vw;}
+    .icono p{ font-size: 11.34vw;}
+}
+
+@media (width < 550px) {
+    img{ width: 25vw;}
+    .icono p{ font-size: 15.75vw;}
+}
+
+
+

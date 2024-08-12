@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Configurar mi alerta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text><p>Seleccione la divisa sobre la cual desea configurar una alerta</p></ion-text>
+  <app-buscar-monedas (cambioOpcionSeleccionada)="opcionSeleccionada=$event"></app-buscar-monedas>
+  <ion-text><p>Seleccione un porcentaje de variación</p></ion-text>
+  <ion-range [pin]="true" snap="true" [step]="0.1" [pinFormatter]="pinFormatter" (ionChange)="onIonChange($event)"></ion-range>
+  <ion-button (click)="configurarAlerta()">Aceptar</ion-button>
+</ion-content>

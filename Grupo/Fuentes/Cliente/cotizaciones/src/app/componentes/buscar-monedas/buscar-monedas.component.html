@@ -1,0 +1,40 @@
+<ion-item (click)="abrir()">
+  <ion-label>Divisa:</ion-label>
+  <div *ngIf="!estaAbierta && opcionSeleccionada.length>0; else placeholder">
+    <span>{{opcionSeleccionada}}</span>
+  </div>
+  <ng-template #placeholder class="ejemplo">
+    <ion-icon name="search-outline"></ion-icon>
+  </ng-template>
+  <ion-modal [isOpen]="estaAbierta">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>
+            Buscar divisa
+          </ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="aceptar()">
+              Aceptar
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+        <ion-toolbar>
+          <ion-searchbar placeholder="Buscar divisa" [debounce]="1000" (ionChange)="buscarMonedas($event)">
+          </ion-searchbar>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div *ngIf="cargando" class="spinner-container">
+          <ion-spinner name="lines-sharp" color="primary" ></ion-spinner>
+        </div>
+        <ion-radio-group *ngIf="!cargando" (ionChange)="monedaSeleccionada($event)">
+          <ion-item *ngFor="let moneda of monedaBuscada">
+            <ion-label>{{ moneda.codigo }} - {{ moneda.nombre }}</ion-label>
+            <ion-radio slot="start" value="{{moneda.codigo}} - {{ moneda.nombre }}"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-item>
